@@ -1,101 +1,64 @@
-import Image from "next/image";
+'use client';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sections } from './types';
+import Home from './components/Home';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import AnimatedSection from './components/AnimatedSection';
+import IntroSection from './components/IntroSection';
+import Navigation from './components/Navigation';
+import LocationSection from './components/LocationSection';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+const sections: Sections = {
+	home: { component: <Home />, label: 'Home' },
+	about: { component: <About />, label: 'About' },
+	skills: { component: <Skills />, label: 'Skills' },
+	projects: { component: <Projects />, label: 'Projects' },
+};
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+const Page: React.FC = () => {
+	const [currentSection, setCurrentSection] = useState<
+		keyof typeof sections | 'intro'
+	>('intro');
+	const [introStage, setIntroStage] = useState<
+		'video' | 'welcome' | 'complete'
+	>('video');
+	const videoRef = useRef<HTMLVideoElement>(null);
+
+	useEffect(() => {
+		if (introStage === 'video') {
+			const timer = setTimeout(() => {
+				setIntroStage('welcome');
+			}, 1000); // Change to welcome stage after 1 second
+			return () => clearTimeout(timer);
+		}
+	}, [introStage]);
+
+	const handleNavigation = (section: keyof typeof sections) => {
+		setCurrentSection(section);
+	};
+
+	if (currentSection === 'intro') {
+		return (
+			<IntroSection
+				introStage={introStage}
+				videoRef={videoRef}
+				setIntroStage={setIntroStage}
+				setCurrentSection={setCurrentSection}
+			/>
+		);
+	}
+
+	return (
+		<div className='relative w-full h-screen overflow-hidden'>
+			<AnimatedSection key={currentSection as string}>
+				{sections[currentSection].component}
+			</AnimatedSection>
+			<Navigation sections={sections} handleNavigation={handleNavigation} />
+			<LocationSection />
+		</div>
+	);
+};
+
+export default Page;
