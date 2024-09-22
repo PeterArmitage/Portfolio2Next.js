@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
-import { AnimationProps } from '../types';
+import { AnimatedSectionProps } from '../types';
 
-const AnimatedSection: React.FC<AnimationProps> = ({ children, key }) => (
-	<motion.div
-		key={key}
-		initial={{ x: '100%', opacity: 0 }}
-		animate={{ x: 0, opacity: 1 }}
-		exit={{ x: '-100%', opacity: 0 }}
-		transition={{ duration: 0.5 }}
-		className='absolute w-full h-full'
-	>
-		{children}
-	</motion.div>
-);
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children }) => {
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: -20 }}
+			transition={{ duration: 0.5 }}
+		>
+			{children}
+		</motion.div>
+	);
+};
 
 export default AnimatedSection;

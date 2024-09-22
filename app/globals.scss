@@ -1,0 +1,123 @@
+@import './styles/main.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--background: #ffffff;
+	--foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+}
+
+body {
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+.NavigationMenuContent {
+	animation-duration: 250ms;
+	animation-timing-function: ease;
+}
+
+.NavigationMenuContent[data-motion='from-start'] {
+	animation-name: enterFromLeft;
+}
+
+.NavigationMenuContent[data-motion='from-end'] {
+	animation-name: enterFromRight;
+}
+
+.NavigationMenuContent[data-motion='to-start'] {
+	animation-name: exitToLeft;
+}
+
+.NavigationMenuContent[data-motion='to-end'] {
+	animation-name: exitToRight;
+}
+
+@keyframes enterFromRight {
+	from {
+		opacity: 0;
+		transform: translateX(200px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes enterFromLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-200px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes exitToRight {
+	from {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(200px);
+	}
+}
+
+@keyframes exitToLeft {
+	from {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(-200px);
+	}
+}
+@layer utilities {
+	.group:hover .group-hover\:text-shadow-neon {
+		text-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80, 0 0 15px #4ade80;
+	}
+}
+@keyframes neonPulse {
+	0%,
+	100% {
+		color: #00ff00;
+		text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00,
+			0 0 20px #00ff00;
+	}
+	50% {
+		color: #66ff66;
+		text-shadow: 0 0 10px #66ff66, 0 0 20px #66ff66, 0 0 30px #66ff66,
+			0 0 40px #66ff66;
+	}
+}
+
+@layer utilities {
+	.neon-pulse {
+		animation: neonPulse 1.5s ease-in-out infinite;
+	}
+}
+
+@layer utilities {
+	.neon-pulse-slow {
+		animation: neonPulse 60s ease-in-out infinite;
+	}
+}

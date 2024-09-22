@@ -1,0 +1,21 @@
+@mixin neon-glow($color) {
+  box-shadow: 0 0 5px $color, 0 0 10px $color, 0 0 15px $color;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $mobile) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (min-width: #{$mobile + 1}px) and (max-width: #{$tablet}px) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: #{$tablet + 1}px) { @content; }
+  }
+}
+
+@mixin neon-text($color) {
+  color: $color;
+  text-shadow: 0 0 5px $color,
+               0 0 10px $color,
+               0 0 15px $color,
+               0 0 20px $color;
+}

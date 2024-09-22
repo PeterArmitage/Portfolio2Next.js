@@ -1,26 +1,18 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import { Sections } from './types';
-import Home from './components/Home';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import AnimatedSection from './components/AnimatedSection';
+import React, { useState, useRef, useEffect } from 'react';
 import IntroSection from './components/IntroSection';
+import Home from './(routes)/Home/page';
 import Navigation from './components/Navigation';
-import LocationSection from './components/LocationSection';
+import { Sections } from './types';
 
 const sections: Sections = {
-	home: { component: <Home />, label: 'Home' },
-	about: { component: <About />, label: 'About' },
-	skills: { component: <Skills />, label: 'Skills' },
-	projects: { component: <Projects />, label: 'Projects' },
+	home: { label: 'Home', component: <Home /> },
+	about: { label: 'About', component: null },
+	projects: { label: 'Projects', component: null },
+	skills: { label: 'Skills', component: null },
+	contacts: { label: 'Contacts', component: null },
 };
-
 const Page: React.FC = () => {
-	const [currentSection, setCurrentSection] = useState<
-		keyof typeof sections | 'intro'
-	>('intro');
 	const [introStage, setIntroStage] = useState<
 		'video' | 'welcome' | 'complete'
 	>('video');
@@ -30,33 +22,25 @@ const Page: React.FC = () => {
 		if (introStage === 'video') {
 			const timer = setTimeout(() => {
 				setIntroStage('welcome');
-			}, 1000); // Change to welcome stage after 1 second
+			}, 1000);
 			return () => clearTimeout(timer);
 		}
 	}, [introStage]);
 
-	const handleNavigation = (section: keyof typeof sections) => {
-		setCurrentSection(section);
-	};
-
-	if (currentSection === 'intro') {
+	if (introStage !== 'complete') {
 		return (
 			<IntroSection
 				introStage={introStage}
 				videoRef={videoRef}
 				setIntroStage={setIntroStage}
-				setCurrentSection={setCurrentSection}
 			/>
 		);
 	}
 
 	return (
 		<div className='relative w-full h-screen overflow-hidden'>
-			<AnimatedSection key={currentSection as string}>
-				{sections[currentSection].component}
-			</AnimatedSection>
-			<Navigation sections={sections} handleNavigation={handleNavigation} />
-			<LocationSection />
+			<Home />
+			<Navigation sections={sections} />
 		</div>
 	);
 };

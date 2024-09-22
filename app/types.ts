@@ -1,12 +1,16 @@
 export interface Section {
-	component: React.ReactNode;
 	label: string;
+	component?: React.ReactNode;
 }
+
 export interface Sections {
 	[key: string]: Section;
 }
 
-export interface AnimationProps {
+export interface AnimatedSectionProps {
 	children: React.ReactNode;
-	key: string;
+}
+
+export interface SpaceModelProps {
+	position?: [number, number, number];
 }

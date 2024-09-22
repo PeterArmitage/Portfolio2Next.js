@@ -1,18 +1,20 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 interface IntroSectionProps {
 	introStage: 'video' | 'welcome' | 'complete';
 	videoRef: React.RefObject<HTMLVideoElement>;
 	setIntroStage: (stage: 'video' | 'welcome' | 'complete') => void;
-	setCurrentSection: (section: string) => void;
 }
 
 const IntroSection: React.FC<IntroSectionProps> = ({
 	introStage,
 	videoRef,
 	setIntroStage,
-	setCurrentSection,
 }) => {
+	const router = useRouter();
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -31,6 +33,11 @@ const IntroSection: React.FC<IntroSectionProps> = ({
 			y: 0,
 			transition: { duration: 0.8 },
 		},
+	};
+
+	const handleEnterPortfolio = () => {
+		setIntroStage('complete');
+		router.push('/Home');
 	};
 
 	return (
@@ -74,16 +81,13 @@ const IntroSection: React.FC<IntroSectionProps> = ({
 							</motion.p>
 							<motion.button
 								variants={itemVariants}
-								onClick={() => {
-									setIntroStage('complete');
-									setCurrentSection('home');
-								}}
+								onClick={handleEnterPortfolio}
 								className='px-6 py-3 bg-blue-500 rounded text-white 
-                                hover:font-bold
-                                transition-all duration-300 ease-in-out
-                                bg-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]
-                                hover:bg-opacity-75
-                                w-48 h-14 overflow-hidden'
+                            hover:font-bold
+                            transition-all duration-300 ease-in-out
+                            bg-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]
+                            hover:bg-opacity-75
+                            w-48 h-14 overflow-hidden'
 							>
 								<span className='inline-block transition-transform duration-300 ease-in-out hover:scale-110'>
 									Enter Portfolio
