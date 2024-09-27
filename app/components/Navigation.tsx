@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {
 	PersonIcon,
@@ -9,7 +9,7 @@ import {
 } from '@radix-ui/react-icons';
 import { Sections } from '../types';
 import GlitchEffect from './GlitchEffect';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navigation.module.scss';
 
 interface NavigationProps {
@@ -24,19 +24,25 @@ const iconMap: { [key: string]: React.ComponentType } = {
 };
 
 const Navigation: React.FC<NavigationProps> = ({ sections }) => {
-	const containerVariants = {
-		hidden: { width: '3rem', height: '3rem' },
-		visible: { width: 'auto', height: '3rem' },
-	};
+	const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
 	const iconVariants = {
-		hidden: { opacity: 1, scale: 1 },
-		visible: { opacity: 0, scale: 0 },
+		initial: { rotate: 0 },
+		animate: {
+			rotate: 360,
+			transition: {
+				duration: 10,
+				repeat: Infinity,
+				ease: 'linear',
+			},
+		},
+		exit: { opacity: 0, transition: { duration: 0.2 } },
 	};
 
 	const textVariants = {
-		hidden: { opacity: 0, scale: 0 },
-		visible: { opacity: 1, scale: 1 },
+		initial: { opacity: 0 },
+		animate: { opacity: 1, transition: { duration: 0.2 } },
+		exit: { opacity: 0, transition: { duration: 0.2 } },
 	};
 
 	return (
@@ -50,24 +56,37 @@ const Navigation: React.FC<NavigationProps> = ({ sections }) => {
 								<GlitchEffect>
 									<motion.div
 										className={styles.navItem}
-										variants={containerVariants}
-										initial='hidden'
-										whileHover='visible'
+										onHoverStart={() => setHoveredItem(key)}
+										onHoverEnd={() => setHoveredItem(null)}
 									>
-										<motion.div
-											variants={iconVariants}
-											className={styles.iconContainer}
-										>
-											<div className={styles.icon}>
-												<Icon />
-											</div>
-										</motion.div>
-										<motion.span
-											className={styles.label}
-											variants={textVariants}
-										>
-											{label}
-										</motion.span>
+										<AnimatePresence initial={false}>
+											{hoveredItem !== key && (
+												<motion.div
+													key='icon'
+													variants={iconVariants}
+													className={styles.iconContainer}
+													initial='initial'
+													animate='animate'
+													exit='exit'
+												>
+													<div className={styles.icon}>
+														<Icon />
+													</div>
+												</motion.div>
+											)}
+											{hoveredItem === key && (
+												<motion.span
+													key='text'
+													className={styles.label}
+													variants={textVariants}
+													initial='initial'
+													animate='animate'
+													exit='exit'
+												>
+													{label}
+												</motion.span>
+											)}
+										</AnimatePresence>
 									</motion.div>
 								</GlitchEffect>
 							</Link>
