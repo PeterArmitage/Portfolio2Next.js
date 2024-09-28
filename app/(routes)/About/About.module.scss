@@ -1,0 +1,69 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  color: white;
+  text-shadow: black 0 0 10px;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.textContent {
+  margin-top: 2rem;
+  
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+}
+
+.connectSection {
+  margin-top: 3rem;
+  text-align: center;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  button {
+    margin-top: 1rem;
+    background-color: white;
+    color: #333333;
+    text-shadow: black 0 0 10px;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e6fffa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

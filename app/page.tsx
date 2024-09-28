@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import IntroSection from './components/IntroSection';
 import Home from './(routes)/Home/page';
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
 import { Sections } from './types';
 
 const sections: Sections = {

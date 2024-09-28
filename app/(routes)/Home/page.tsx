@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from './Home.module.scss';
 import Lottie from 'lottie-react';
 import ufo from '../../../public/ufo.json';
-import ContactIcons from '../../components/ContactIcons';
+import ContactIcons from '../../components/ContactIcons/ContactIcons';
 
 const Home = () => {
 	const videoRef = useRef<HTMLVideoElement>(null);

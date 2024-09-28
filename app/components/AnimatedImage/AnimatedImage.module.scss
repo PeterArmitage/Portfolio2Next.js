@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem; 
+}
+
+.imageWrapper {
+  width: 10rem;  
+  height: 10rem; 
+  border-radius: 50%;
+  border: 4px solid white;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.backfaceImage {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
