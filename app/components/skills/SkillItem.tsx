@@ -1,18 +1,19 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from './Skills.module.scss';
 
+import { IconType } from 'react-icons';
+
 interface SkillItemProps {
-	icon: string;
+	icon: IconType;
 	title: string;
 	xp: string;
 }
 
-const SkillItem: React.FC<SkillItemProps> = ({ icon, title, xp }) => {
+const SkillItem: React.FC<SkillItemProps> = ({ icon: Icon, title, xp }) => {
 	return (
 		<div className={styles.skill}>
 			<div className={styles.iconContainer}>
-				<Image src={icon} alt={title} width={30} height={30} />
+				<Icon size={30} />
 			</div>
 			<div className={styles.skillContent}>
 				<p>{title}</p>

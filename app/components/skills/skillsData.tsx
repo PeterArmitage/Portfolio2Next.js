@@ -1,7 +1,18 @@
+import { IconType } from 'react-icons';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact } from 'react-icons/fa';
+import {
+	SiTypescript,
+	SiNextdotjs,
+	SiMongodb,
+	SiPrisma,
+	SiRedux,
+} from 'react-icons/si';
+import { TbBrandMantine } from 'react-icons/tb';
+
 export interface Skill {
 	name: string;
 	xp: string;
-	icon: string;
+	icon: IconType;
 }
 
 export interface HardSkillCategory {
@@ -22,33 +33,33 @@ export const skillCat: Record<string, SkillCategory> = {
 		categoryName: 'Web Dev',
 		percentage: 50,
 		skillList: [
-			{ name: 'HTML', xp: '2 YRS', icon: '/images/skills/html.png' },
-			{ name: 'CSS', xp: '2 YRS', icon: '/images/skills/css.png' },
-			{ name: 'Javascript', xp: '2 YRS', icon: '/images/skills/js.png' },
-			{ name: 'Typescript', xp: '1 YR', icon: '/images/skills/bootstrap.png' },
-			{ name: 'Next.js', xp: '1 YR', icon: '/images/skills/csharp.png' },
-			{ name: 'React js', xp: '2 YRS', icon: '/images/skills/react.png' },
-			{ name: 'Mantine.ui', xp: '1 YR', icon: '/images/skills/db.png' },
-			{ name: 'Shadcn', xp: '1 YR', icon: '/images/skills/figma.png' },
-			{ name: 'Remix', xp: '6 Months', icon: '/images/skills/dotnet.png' },
+			{ name: 'HTML', xp: '2 YRS', icon: FaHtml5 },
+			{ name: 'CSS', xp: '2 YRS', icon: FaCss3Alt },
+			{ name: 'Javascript', xp: '2 YRS', icon: FaJs },
+			{ name: 'Typescript', xp: '1 YR', icon: SiTypescript },
+			{ name: 'Next.js', xp: '1 YR', icon: SiNextdotjs },
+			{ name: 'React js', xp: '2 YRS', icon: FaReact },
+			{ name: 'Mantine.ui', xp: '1 YR', icon: TbBrandMantine },
+			{ name: 'Shadcn', xp: '1 YR', icon: TbBrandMantine },
+			{ name: 'Remix', xp: '6 Months', icon: TbBrandMantine },
 		],
 	},
 	game: {
 		categoryName: 'Database',
 		percentage: 20,
 		skillList: [
-			{ name: 'Supabase', xp: '1 YR', icon: '/images/skills/unity.png' },
-			{ name: 'MongoDB', xp: '1 YR', icon: '/images/skills/csharp.png' },
-			{ name: 'Prisma', xp: '1 YR', icon: '/images/skills/ps.png' },
+			{ name: 'MongoDB', xp: '1 YR', icon: SiMongodb },
+			{ name: 'Prisma', xp: '1 YR', icon: SiPrisma },
+			{ name: 'Prisma', xp: '1 YR', icon: SiPrisma },
 		],
 	},
 	design: {
 		categoryName: 'Tools',
 		percentage: 30,
 		skillList: [
-			{ name: 'Zustand', xp: '1 YR1', icon: '/images/skills/figma.png' },
-			{ name: 'Redux Toolkit', xp: '1 YR1', icon: '/images/skills/figma.png' },
-			{ name: 'Framer Motion', xp: '1 YR', icon: '/images/skills/figma.png' },
+			{ name: 'Redux Toolkit', xp: '1 YR', icon: SiRedux },
+			{ name: 'Zustand', xp: '1 YR1', icon: SiRedux },
+			{ name: 'Framer Motion', xp: '1 YR', icon: SiRedux },
 		],
 	},
 	soft: {
