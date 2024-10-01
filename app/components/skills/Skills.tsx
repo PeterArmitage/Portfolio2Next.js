@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -14,7 +13,7 @@ import {
 import styles from './Skills.module.scss';
 
 export default function Skills() {
-	const { soft, ...hardSkills } = skillCat;
+	const { soft: _, ...hardSkills } = skillCat;
 	const skillInterval = useRef<NodeJS.Timeout | null>(null);
 	const skillTimeout = useRef<NodeJS.Timeout | null>(null);
 	const [softSkillIndex, setSoftSkillIndex] = useState<number>(0);

@@ -106,9 +106,18 @@ const Home = () => {
 					<Lottie animationData={ufo} loop={true} />
 				</motion.div>
 			)}
-			<motion.div className={styles.topRight} variants={itemVariants}>
+			<div
+				className={styles.contactIconsWrapper}
+				style={{
+					position: 'absolute',
+					top: '20px',
+					right: '20px',
+					zIndex: 9999,
+					pointerEvents: 'auto',
+				}}
+			>
 				<ContactIcons />
-			</motion.div>
+			</div>
 			<motion.div className={styles.content} variants={itemVariants}>
 				<motion.h1 className={styles.title} variants={itemVariants}>
 					Welcome to My Digital Universe

@@ -22,8 +22,7 @@
 .contactIcons {
   display: flex;
   gap: 20px;
-  position: relative;
-  z-index: 101; 
+  
 }
 .icon {
   width: 24px;
@@ -40,7 +39,7 @@
   }
 
   &:hover {
-    animation: none;
+    animation:none;
     color: #00ff00;
     filter: drop-shadow(0 0 5px #00ff00) drop-shadow(0 0 10px #00ff00);
     animation: neonPulse 1.5s ease-in-out infinite;

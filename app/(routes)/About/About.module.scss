@@ -1,3 +1,13 @@
+.pageWrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  &.modalOpen {
+    overflow: hidden;
+  }
+}
+
 .container {
   position: relative;
   display: flex;
@@ -10,7 +20,6 @@
   padding: 2rem;
   overflow-y: auto;
 }
-
 
 .content {
   position: relative;
@@ -55,15 +64,24 @@
     margin-top: 1rem;
     background-color: white;
     color: #333333;
-    text-shadow: black 0 0 10px;
+    text-shadow: none;
     padding: 0.5rem 1.5rem;
     border-radius: 9999px;
     font-weight: 600;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
 
     &:hover {
       background-color: #e6fffa;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
   }
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
 }

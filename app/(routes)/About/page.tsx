@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './About.module.scss';
+import ContactFormModal from '@/app/components/ContactFormModal/ContactFormModal';
 
 const AnimatedImage = dynamic(
 	() => import('../../components/AnimatedImage/AnimatedImage'),
@@ -19,13 +20,19 @@ const AnimatedBackground = dynamic(
 
 const About = () => {
 	const [isClient, setIsClient] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
 		setIsClient(true);
 	}, []);
 
+	const handleOpenModal = () => setIsModalOpen(true);
+	const handleCloseModal = () => setIsModalOpen(false);
+
 	return (
-		<>
+		<div
+			className={`${styles.pageWrapper} ${isModalOpen ? styles.modalOpen : ''}`}
+		>
 			{isClient && <AnimatedBackground />}
 			<div className={styles.container}>
 				<div className={styles.content}>
@@ -79,11 +86,13 @@ const About = () => {
 							fitness, sports, or web development. Feel free to reach out and
 							start a conversation!
 						</p>
-						<button>Get in Touch</button>
+						<button onClick={handleOpenModal}>Get in Touch</button>
 					</div>
 				</div>
 			</div>
-		</>
+			{isModalOpen && <div className={styles.overlay} />}
+			<ContactFormModal isOpen={isModalOpen} onClose={handleCloseModal} />
+		</div>
 	);
 };
 

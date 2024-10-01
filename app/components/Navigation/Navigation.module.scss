@@ -6,6 +6,9 @@
   top: 1rem;
   left: 1rem;
   z-index: 50;
+  width: calc(100% - 2rem);
+  pointer-events: none;
+
 }
 
 .navList {
@@ -23,12 +26,36 @@
   color: #ffffff; 
   transition: all 0.3s ease-in-out;
   overflow: visible;
+  cursor: pointer; 
+  pointer-events: auto;
 
   &:hover {
     color: #00ff00; 
     filter: drop-shadow(0 0 5px #00ff00) drop-shadow(0 0 10px #00ff00);
     animation: neonPulse 1.5s ease-in-out infinite;
   }
+
+  .previewBox {
+    position: fixed;
+    width: 150px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+  }
+
+  &:hover .previewBox {
+    opacity: 1;
+  }
+}
+.previewAbout {
+  left: auto !important;
+  right: 0;
 }
 
 .iconContainer, .label {
@@ -49,6 +76,17 @@
   white-space: nowrap;
   font-size: 1rem;
   padding: 0 0.25rem;
+}
+
+
+.navItem > div, 
+.navItem > a {  
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 @keyframes neonPulse {
