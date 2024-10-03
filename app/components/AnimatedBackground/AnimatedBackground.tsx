@@ -4,7 +4,12 @@ import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './AnimatedBackground.module.scss';
 
-const AnimatedBackground = () => {
+interface AnimatedBackgroundProps {
+	videoSrc: string;
+}
+const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
+	videoSrc,
+}) => {
 	const videoRef = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
@@ -30,7 +35,7 @@ const AnimatedBackground = () => {
 				muted
 				playsInline
 			>
-				<source src='/videos/makima2.mp4' type='video/mp4' />
+				<source src={videoSrc} type='video/mp4' />
 				Your browser does not support the video tag.
 			</video>
 			<div className={styles.videoOverlay}></div>

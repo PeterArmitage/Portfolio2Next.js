@@ -14,7 +14,7 @@ import styles from './Navigation.module.scss';
 
 interface NavigationProps {
 	sections: Sections;
-	onOpenContactModal: () => void;
+	onOpenContactModal?: () => void;
 }
 
 const iconMap: { [key: string]: React.ComponentType } = {

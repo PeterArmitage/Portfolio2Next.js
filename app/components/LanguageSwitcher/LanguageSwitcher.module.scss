@@ -1,0 +1,17 @@
+.languageSwitcher {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    cursor: pointer;
+  
+    div {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+  
+    img {
+      backface-visibility: hidden;
+    }
+  }

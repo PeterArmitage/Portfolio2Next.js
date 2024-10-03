@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, FieldApi } from '@tanstack/react-form';
 import { z } from 'zod';
+import * as Toast from '@radix-ui/react-toast';
 import styles from './ContactFormModal.module.scss';
 
 const formSchema = z.object({
@@ -25,153 +25,197 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
+	const [toastOpen, setToastOpen] = useState(false);
+	const [toastData, setToastData] = useState<{
+		message: string;
+		type: 'success' | 'error';
+	}>({ message: '', type: 'success' });
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = useForm<FormValues>({
-		resolver: zodResolver(formSchema),
-	});
+	const form = useForm<FormValues>({
+		defaultValues: {
+			name: '',
+			company: '',
+			email: '',
+			subject: '',
+			message: '',
+		},
+		onSubmit: async (values) => {
+			setIsSubmitting(true);
+			setSubmitError(null);
 
-	const onSubmit: SubmitHandler<FormValues> = async (data) => {
-		setIsSubmitting(true);
-		setSubmitError(null);
+			try {
+				const formData = {
+					name: values.value.name,
+					company: values.value.company,
+					email: values.value.email,
+					subject: values.value.subject,
+					message: values.value.message,
+				};
 
-		try {
-			const response = await fetch('/api/contact', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
-			});
-			console.log('Full response:', response);
+				const response = await fetch('/api/contact', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(formData),
+				});
 
-			// Log the response text
-			console.log('Response status:', response.status);
-			console.log('Response headers:', response.headers);
-			const responseText = await response.text();
-			console.log('Response text:', responseText);
-
-			if (!response.ok) {
-				let errorMessage: string;
-				try {
-					const errorData = JSON.parse(responseText);
-					errorMessage = errorData.message || 'Failed to submit form';
-				} catch (parseError) {
-					console.error('Error parsing response:', parseError);
-					errorMessage = 'Received an invalid response from the server';
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(errorData.message || 'Failed to submit form');
 				}
-				throw new Error(errorMessage);
-			}
 
-			// Form submitted successfully
-			reset();
-			onClose();
-		} catch (error) {
-			console.error('Error submitting form:', error);
-			setSubmitError(
-				error instanceof Error
-					? error.message
-					: 'An error occurred while submitting the form. Please try again.'
-			);
-		} finally {
-			setIsSubmitting(false);
-		}
-	};
+				setToastData({ message: 'Email sent successfully!', type: 'success' });
+				setToastOpen(true);
+				form.reset();
+				setTimeout(() => {
+					onClose();
+				}, 3000);
+			} catch (error) {
+				console.error('Error submitting form:', error);
+				const errorMessage =
+					error instanceof Error
+						? error.message
+						: 'An error occurred while submitting the form. Please try again.';
+				setSubmitError(errorMessage);
+				setToastData({ message: errorMessage, type: 'error' });
+				setToastOpen(true);
+			} finally {
+				setIsSubmitting(false);
+			}
+		},
+	});
 
 	if (!isOpen) return null;
 
-	return (
-		<div className={styles.modalWrapper}>
-			<div className={styles.modalContent}>
-				<h2 className={styles.title}>Contact Me</h2>
-				<form onSubmit={handleSubmit(onSubmit)}>
+	const Field = ({
+		name,
+		label,
+		type = 'text',
+		placeholder,
+	}: {
+		name: keyof FormValues;
+		label: string;
+		type?: string;
+		placeholder: string;
+	}) => {
+		return (
+			<form.Field name={name}>
+				{(field: FieldApi<FormValues, typeof name>) => (
 					<div className={styles.field}>
-						<label htmlFor='name'>Name *</label>
-						<input id='name' {...register('name')} placeholder='Your Name' />
-						{errors.name && (
-							<span className={styles.error}>{errors.name.message}</span>
+						<label htmlFor={name}>{label}</label>
+						{type === 'textarea' ? (
+							<textarea
+								id={name}
+								name={name}
+								value={field.state.value as string}
+								onBlur={field.handleBlur}
+								onChange={(e) => field.handleChange(e.target.value)}
+								placeholder={placeholder}
+							/>
+						) : (
+							<input
+								id={name}
+								name={name}
+								type={type}
+								value={field.state.value as string}
+								onBlur={field.handleBlur}
+								onChange={(e) => field.handleChange(e.target.value)}
+								placeholder={placeholder}
+							/>
 						)}
+						{field.state.meta.errors ? (
+							<span className={styles.error}>{field.state.meta.errors[0]}</span>
+						) : null}
 					</div>
+				)}
+			</form.Field>
+		);
+	};
 
-					<div className={styles.field}>
-						<label htmlFor='company'>Company</label>
-						<input
-							id='company'
-							{...register('company')}
+	return (
+		<Toast.Provider swipeDirection='right'>
+			<div className={styles.modalWrapper}>
+				<div className={styles.modalContent}>
+					<h2 className={styles.title}>Contact Me</h2>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							void form.handleSubmit();
+						}}
+					>
+						<Field name='name' label='Name *' placeholder='Your Name' />
+						<Field
+							name='company'
+							label='Company'
 							placeholder='Your Company (Optional)'
 						/>
-					</div>
-
-					<div className={styles.field}>
-						<label htmlFor='email'>Email *</label>
-						<input
-							id='email'
+						<Field
+							name='email'
+							label='Email *'
 							type='email'
-							{...register('email')}
 							placeholder='your.email@example.com'
 						/>
-						{errors.email && (
-							<span className={styles.error}>{errors.email.message}</span>
-						)}
-					</div>
-
-					<div className={styles.field}>
-						<label htmlFor='subject'>Subject *</label>
-						<input
-							id='subject'
-							{...register('subject')}
-							placeholder='Subject'
-						/>
-						{errors.subject && (
-							<span className={styles.error}>{errors.subject.message}</span>
-						)}
-					</div>
-
-					<div className={styles.field}>
-						<label htmlFor='message'>Message *</label>
-						<textarea
-							id='message'
-							{...register('message')}
+						<Field name='subject' label='Subject *' placeholder='Subject' />
+						<Field
+							name='message'
+							label='Message *'
+							type='textarea'
 							placeholder='Your message here...'
 						/>
-						{errors.message && (
-							<span className={styles.error}>{errors.message.message}</span>
-						)}
-					</div>
 
-					<div className={styles.actions}>
-						<button
-							type='submit'
-							disabled={isSubmitting}
-							className={styles.submitButton}
-						>
-							{isSubmitting ? 'Sending...' : 'Send Message'}
-						</button>
-						<button
-							type='button'
-							onClick={onClose}
-							disabled={isSubmitting}
-							className={styles.cancelButton}
-						>
-							Cancel
-						</button>
-					</div>
+						<div className={styles.actions}>
+							<button
+								type='submit'
+								disabled={isSubmitting}
+								className={styles.submitButton}
+							>
+								{isSubmitting ? 'Sending...' : 'Send Message'}
+							</button>
+							<button
+								type='button'
+								onClick={onClose}
+								disabled={isSubmitting}
+								className={styles.cancelButton}
+							>
+								Cancel
+							</button>
+						</div>
 
-					{submitError && <div className={styles.error}>{submitError}</div>}
-				</form>
-				<button
-					onClick={onClose}
-					className={styles.closeButton}
-					aria-label='Close'
-				>
-					×
-				</button>
+						{submitError && <div className={styles.error}>{submitError}</div>}
+					</form>
+					<button
+						onClick={onClose}
+						className={styles.closeButton}
+						aria-label='Close'
+					>
+						×
+					</button>
+				</div>
 			</div>
-		</div>
+			<Toast.Root
+				className={styles.ToastRoot}
+				open={toastOpen}
+				onOpenChange={setToastOpen}
+			>
+				<Toast.Title className={styles.ToastTitle}>
+					{toastData.type === 'success' ? 'Success' : 'Error'}
+				</Toast.Title>
+				<Toast.Description className={styles.ToastDescription}>
+					{toastData.message}
+				</Toast.Description>
+				<Toast.Action className={styles.ToastAction} asChild altText='Close'>
+					<button
+						className={styles.ToastButton}
+						onClick={() => setToastOpen(false)}
+					>
+						Close
+					</button>
+				</Toast.Action>
+			</Toast.Root>
+			<Toast.Viewport className={styles.ToastViewport} />
+		</Toast.Provider>
 	);
 };
 

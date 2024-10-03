@@ -10,11 +10,6 @@ const formSchema = z.object({
 	message: z.string().min(1, 'Message is required'),
 });
 
-export async function GET() {
-	console.log('Received GET request to /api/contact');
-	return NextResponse.json({ message: 'Contact API is working' });
-}
-
 export async function POST(request: NextRequest) {
 	console.log('Received POST request to /api/contact');
 
@@ -34,24 +29,32 @@ export async function POST(request: NextRequest) {
 			},
 		});
 
-		await transporter.sendMail({
-			from: process.env.EMAIL_FROM,
-			to: process.env.EMAIL_TO,
-			subject: `New contact form submission: ${validatedData.subject}`,
-			text: `
-        Name: ${validatedData.name}
-        Company: ${validatedData.company || 'N/A'}
-        Email: ${validatedData.email}
-        Subject: ${validatedData.subject}
-        Message: ${validatedData.message}
-      `,
-		});
+		try {
+			await transporter.sendMail({
+				from: process.env.EMAIL_FROM,
+				to: process.env.EMAIL_TO,
+				subject: `New contact form submission: ${validatedData.subject}`,
+				text: `
+          Name: ${validatedData.name}
+          Company: ${validatedData.company || 'N/A'}
+          Email: ${validatedData.email}
+          Subject: ${validatedData.subject}
+          Message: ${validatedData.message}
+        `,
+			});
 
-		console.log('Email sent successfully');
-		return NextResponse.json(
-			{ message: 'Form submitted successfully' },
-			{ status: 200 }
-		);
+			console.log('Email sent successfully');
+			return NextResponse.json(
+				{ message: 'Form submitted successfully' },
+				{ status: 200 }
+			);
+		} catch (emailError) {
+			console.error('Error sending email:', emailError);
+			return NextResponse.json(
+				{ message: 'Error sending email' },
+				{ status: 500 }
+			);
+		}
 	} catch (error) {
 		console.error('Error processing form submission:', error);
 		if (error instanceof z.ZodError) {

@@ -33,7 +33,7 @@ const About = () => {
 		<div
 			className={`${styles.pageWrapper} ${isModalOpen ? styles.modalOpen : ''}`}
 		>
-			{isClient && <AnimatedBackground />}
+			{isClient && <AnimatedBackground videoSrc='/videos/makima2.mp4' />}
 			<div className={styles.container}>
 				<div className={styles.content}>
 					<div className={styles.textContent}>

@@ -1,7 +1,16 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Space_Mono, Exo_2 } from 'next/font/google';
+import dynamic from 'next/dynamic';
+import { ClientI18nProvider } from './components/ClientI18nProvider';
 import './globals.scss';
+
+const LanguageSwitcher = dynamic(
+	() => import('./components/LanguageSwitcher/LanguageSwitcher'),
+	{
+		ssr: false,
+	}
+);
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -42,7 +51,10 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${spaceMono.variable} ${exo2.variable} antialiased`}
 			>
-				{children}
+				<ClientI18nProvider>
+					<LanguageSwitcher />
+					{children}
+				</ClientI18nProvider>
 			</body>
 		</html>
 	);
