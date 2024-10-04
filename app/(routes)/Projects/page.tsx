@@ -12,18 +12,43 @@ const AnimatedBackground = dynamic(
 );
 const projects = [
 	{
-		title: 'Company Calendar',
+		title: 'Finance Dashboard',
 		image: '/images/dashboard.finance.png',
 		description:
-			"Problem: Nigerian businesses across all sectors especially SME's struggle to comply with company legal regulations. Solution: Built a platform that will enable these companies at the tap of a button know what regulations apply to their incorporated company without having to afford a lawyer.",
+			'Comprehensive financial management tool that empowers users to take control of their finances. Track income, expenses, and transactions effortlessly. Set and monitor financial goals, generate insightful reports, and make informed decisions about your money. Your personal financial command center.',
+		stack:
+			'Next.js, Prisma, Supabase, Tailwind CSS, Next Auth, Typescript, Shadcn-Ui, Zod',
+		link: 'https://personalfinance84.netlify.app/',
+		github: 'https://github.com/PeterArmitage/personal-finance',
 	},
 	{
-		title: 'Pipar',
+		title: 'Fit Forge',
 		image: '/images/ExerciseLibrary.png',
 		description:
-			'A Digital Web3 Platform For Tokenizing Company Shares/Stocks. These Assets Can Be Fungible Or Non-Fungible',
+			'All-in-one fitness and wellness hub designed to optimize your health journey. Log workouts, discover new exercises, and explore nutritious meal ideas. Access sleep improvement and recovery techniques, and monitor various health metrics. Your personal trainer, nutritionist, and wellness coach rolled into one powerful dashboard.',
+		stack:
+			'Next.js, Prisma, Supabase, Tailwind CSS, Next Auth, Typescript, Shadcn-Ui, Zod',
+		link: 'https://fit-forge84.netlify.app/',
+		github: 'https://github.com/PeterArmitage/FitnessApp',
 	},
-	// Add more projects here...
+	{
+		title: 'Todo-App',
+		image: '/images/todoscreen.png',
+		description:
+			'Barebones todo widget created with AI in one short prompt that i used to learn coding in Python, which i transferred into an App. Very basic, but used to help with studies.',
+		stack: 'Python, Tkinter, Flask',
+		link: 'https://pythontodo.netlify.app/',
+		github: 'https://github.com/PeterArmitage/python_todo',
+	},
+	{
+		title: 'My First Portfolio',
+		image: '/images/portfoliopic.png',
+		description:
+			'The first project i created was my portfolio, to showcase my projects and give it a little functionality with the knowledge i acquired. But i know i could do better, so i tried again!',
+		stack: 'React with Vite, I18next, Tailwind Css',
+		link: 'https://portfoliopa84.netlify.app/',
+		github: 'https://github.com/PeterArmitage/portfolio',
+	},
 ];
 
 export default function Projects() {
@@ -89,8 +114,27 @@ export default function Projects() {
 							<div className={styles.projectDetails}>
 								<h4>{project.title}</h4>
 								<p>{project.description}</p>
+								<div className={styles.stackSection}>
+									<h5>Tech Stack:</h5>
+									<p>{project.stack}</p>
+								</div>
 								<div className={styles.buttonWrap}>
-									<button className={styles.button}>Visit &rarr;</button>
+									<a
+										href={project.link}
+										target='_blank'
+										rel='noopener noreferrer'
+										className={styles.button}
+									>
+										Visit &rarr;
+									</a>
+									<a
+										href={project.github}
+										target='_blank'
+										rel='noopener noreferrer'
+										className={styles.button}
+									>
+										GitHub &rarr;
+									</a>
 								</div>
 							</div>
 						</div>

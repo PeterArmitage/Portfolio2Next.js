@@ -1,10 +1,18 @@
 'use client';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Navigation from '../components/Navigation/Navigation';
 import BackToHome from '../components/BackToHome';
 import { Sections } from '../types';
 import ContactFormModal from '../components/ContactFormModal/ContactFormModal';
+
+const LanguageSwitcher = dynamic(
+	() => import('../components/LanguageSwitcher/LanguageSwitcher'),
+	{
+		ssr: false,
+	}
+);
 
 const sections: Sections = {
 	About: { label: 'About' },
@@ -42,6 +50,7 @@ export default function RoutesLayout({
 				isOpen={isContactModalOpen}
 				onClose={closeContactModal}
 			/>
+			<LanguageSwitcher />
 		</div>
 	);
 }

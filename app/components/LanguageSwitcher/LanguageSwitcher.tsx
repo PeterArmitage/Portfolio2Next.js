@@ -31,17 +31,19 @@ const LanguageSwitcher: React.FC = () => {
 				>
 					{i18n.language === 'en' ? (
 						<Image
-							src='/images/br-flag.png'
+							src='/images/brazil2.png'
 							alt='Brazilian Flag'
-							width={40}
-							height={40}
+							width={50}
+							height={50}
+							className='rounded-md'
 						/>
 					) : (
 						<Image
-							src='/images/us-flag.png'
+							src='/images/usa2.png'
 							alt='US Flag'
 							width={40}
 							height={40}
+							className='rounded-md'
 						/>
 					)}
 				</motion.div>
