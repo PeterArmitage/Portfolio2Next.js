@@ -1,0 +1,89 @@
+{
+    "home": {
+      "title": "Welcome to My Digital Universe",
+      "subtitle": "Embark on a journey through my portfolio of web development projects",
+      "launchButton": "Launch Projects"
+    },
+    "navigation": {
+      "Home": "Home",
+      "About": "About",
+      "Skills": "Skills",
+      "Contacts": "Contacts"
+    },
+    "projects": {
+    "title": "All Projects",
+    "techStack": "Tech Stack:",
+    "visit": "Visit",
+    "github": "GitHub",
+    "items": [
+      {
+        "title": "Finance Dashboard",
+        "description": "Comprehensive financial management tool that empowers users to take control of their finances. Track income, expenses, and transactions effortlessly. Set and monitor financial goals, generate insightful reports, and make informed decisions about your money. Your personal financial command center."
+      },
+      {
+        "title": "Fit Forge",
+        "description": "All-in-one fitness and wellness hub designed to optimize your health journey. Log workouts, discover new exercises, and explore nutritious meal ideas. Access sleep improvement and recovery techniques, and monitor various health metrics. Your personal trainer, nutritionist, and wellness coach rolled into one powerful dashboard."
+      },
+      {
+        "title": "Todo-App",
+        "description": "A streamlined task management application developed as part of my journey into Python programming. This project showcases fundamental programming concepts and demonstrates my ability to translate theoretical knowledge into practical, user-friendly software. It serves as a foundation for understanding web application architecture and user interface design."
+      },
+      {
+        "title": "My First Portfolio",
+        "description": "An initial iteration of my professional portfolio, designed to showcase my early projects and demonstrate my growing proficiency in web development. This project reflects my first steps in creating a comprehensive online presence, incorporating responsive design principles and modern web technologies. It serves as a benchmark for my progression in front-end development and UI/UX design."
+      }
+    ]
+  },
+  "skills": {
+    "categories": {
+      "webDev": "Web Dev",
+      "database": "Database",
+      "tools": "Tools"
+    },
+    "softSkills": [
+      "Creative",
+      "Perseverant",
+      "Patient",
+      "Enthusiastic",
+      "Hardworking",
+      "Amusing"
+    ]
+  },
+  "about": {
+    "title": "About Me",
+    "intro": "Hello! My name is Pete and I'm a self-taught full stack developer with a passion for creating functional and engaging websites. Originally from the UK, I've been calling Brazil my home for the past 14 years, embracing the vibrant culture and diverse experiences it offers.",
+    "journey": "My journey in web development has been driven by an insatiable curiosity and a love for learning. I thrive on the ever-evolving nature of this field, always eager to explore new technologies and methodologies. React has captured my heart, but I'm also nurturing a growing interest in game development, aiming to combine my coding skills with my love for interactive entertainment.",
+    "teamwork": "As a developer, I pride myself on being a strong team player. I believe in the power of collaboration and the magic that happens when diverse minds come together to solve problems and create innovative solutions.",
+    "interests": "Beyond coding, I'm a bit of a nerd at heart. I have a deep appreciation for anime and manga, finding inspiration in their storytelling and artistry. When I'm not immersed in lines of code or the latest manga chapter, you might find me cheering for my favorite football team or working on my fitness.",
+    "connection": "I'm always excited to connect with like-minded individuals who share my passions. Whether you want to discuss the latest anime series, debate football tactics, or explore new frontiers in web development, I'm all ears!",
+    "animals": "Oh, and did I mention my love for animals? They bring so much joy and companionship to our lives!",
+    "connect": {
+      "title": "Let's Connect!",
+      "description": "I'd love to hear about your interests in anime, manga, fitness, sports, or web development. Feel free to reach out and start a conversation!",
+      "button": "Get in Touch"
+    }
+  },
+  "contactForm": {
+    "title": "Contact Me",
+    "name": "Name *",
+    "company": "Company",
+    "email": "Email *",
+    "subject": "Subject *",
+    "message": "Message *",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "close": "Close",
+    "success": "Success",
+    "error": "Error",
+    "successMessage": "Email sent successfully!",
+    "errorMessage": "An error occurred while submitting the form. Please try again.",
+    "placeholders": {
+      "name": "Your Name",
+      "company": "Your Company (Optional)",
+      "email": "your.email@example.com",
+      "subject": "Subject",
+      "message": "Your message here..."
+    }
+  }
+}

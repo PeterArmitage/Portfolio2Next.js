@@ -1,0 +1,40 @@
+.skeleton {
+    background: #f0f0f0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  
+    &.text {
+      height: 20px;
+      width: 100%;
+    }
+  
+    &.title {
+      height: 32px;
+      width: 50%;
+      margin-bottom: 20px;
+    }
+  
+    &.image {
+      height: 200px;
+      width: 200px;
+    }
+  
+    &.button {
+      height: 40px;
+      width: 120px;
+    }
+  
+    @keyframes pulse {
+      0% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.6;
+      }
+    }
+  
+    animation: pulse 1.5s infinite ease-in-out;
+  }

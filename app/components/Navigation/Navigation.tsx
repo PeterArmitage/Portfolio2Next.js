@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import {
 	PersonIcon,
 	EnvelopeClosedIcon,
@@ -28,6 +29,7 @@ const Navigation: React.FC<NavigationProps> = ({
 	sections,
 	onOpenContactModal,
 }) => {
+	const { t } = useTranslation();
 	const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 	const [previewPosition, setPreviewPosition] = useState({ top: 0, left: 0 });
 	const navRef = useRef<HTMLElement>(null);
@@ -83,6 +85,7 @@ const Navigation: React.FC<NavigationProps> = ({
 		isContactItem: boolean
 	) => {
 		const Icon = iconMap[label] || PersonIcon;
+		const translatedLabel = t(`navigation.${label}`);
 
 		const content = (
 			<GlitchEffect>
@@ -115,7 +118,7 @@ const Navigation: React.FC<NavigationProps> = ({
 								animate='animate'
 								exit='exit'
 							>
-								{label}
+								{translatedLabel}
 							</motion.span>
 						)}
 					</AnimatePresence>

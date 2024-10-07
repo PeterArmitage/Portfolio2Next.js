@@ -3,23 +3,25 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-const isBrowser = typeof window !== 'undefined';
+i18n
+	.use(Backend)
+	.use(LanguageDetector)
+	.use(initReactI18next)
+	.init({
+		fallbackLng: 'en',
+		debug: process.env.NODE_ENV === 'development',
+		interpolation: {
+			escapeValue: false,
+		},
+		backend: {
+			loadPath: '/locales/{{lng}}/{{ns}}.json',
+		},
 
-if (isBrowser) {
-	i18n
-		.use(Backend)
-		.use(LanguageDetector)
-		.use(initReactI18next)
-		.init({
-			fallbackLng: 'en',
-			debug: true,
-			interpolation: {
-				escapeValue: false,
-			},
-			backend: {
-				loadPath: '/locales/{{lng}}/{{ns}}.json',
-			},
-		});
-}
+		react: {
+			useSuspense: false,
+		},
+
+		preload: ['en', 'pt'],
+	});
 
 export default i18n;

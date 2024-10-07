@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForm, FieldApi } from '@tanstack/react-form';
 import { z } from 'zod';
 import * as Toast from '@radix-ui/react-toast';
@@ -23,6 +24,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 	isOpen,
 	onClose,
 }) => {
+	const { t } = useTranslation();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 	const [toastOpen, setToastOpen] = useState(false);
@@ -62,10 +64,13 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 
 				if (!response.ok) {
 					const errorData = await response.json();
-					throw new Error(errorData.message || 'Failed to submit form');
+					throw new Error(errorData.message || t('contactForm.errorMessage'));
 				}
 
-				setToastData({ message: 'Email sent successfully!', type: 'success' });
+				setToastData({
+					message: t('contactForm.successMessage'),
+					type: 'success',
+				});
 				setToastOpen(true);
 				form.reset();
 				setTimeout(() => {
@@ -76,7 +81,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 				const errorMessage =
 					error instanceof Error
 						? error.message
-						: 'An error occurred while submitting the form. Please try again.';
+						: t('contactForm.errorMessage');
 				setSubmitError(errorMessage);
 				setToastData({ message: errorMessage, type: 'error' });
 				setToastOpen(true);
@@ -137,7 +142,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 		<Toast.Provider swipeDirection='right'>
 			<div className={styles.modalWrapper}>
 				<div className={styles.modalContent}>
-					<h2 className={styles.title}>Contact Me</h2>
+					<h2 className={styles.title}>{t('contactForm.title')}</h2>
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -145,24 +150,32 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 							void form.handleSubmit();
 						}}
 					>
-						<Field name='name' label='Name *' placeholder='Your Name' />
+						<Field
+							name='name'
+							label={t('contactForm.name')}
+							placeholder={t('contactForm.placeholders.name')}
+						/>
 						<Field
 							name='company'
-							label='Company'
-							placeholder='Your Company (Optional)'
+							label={t('contactForm.company')}
+							placeholder={t('contactForm.placeholders.company')}
 						/>
 						<Field
 							name='email'
-							label='Email *'
+							label={t('contactForm.email')}
 							type='email'
-							placeholder='your.email@example.com'
+							placeholder={t('contactForm.placeholders.email')}
 						/>
-						<Field name='subject' label='Subject *' placeholder='Subject' />
+						<Field
+							name='subject'
+							label={t('contactForm.subject')}
+							placeholder={t('contactForm.placeholders.subject')}
+						/>
 						<Field
 							name='message'
-							label='Message *'
+							label={t('contactForm.message')}
 							type='textarea'
-							placeholder='Your message here...'
+							placeholder={t('contactForm.placeholders.message')}
 						/>
 
 						<div className={styles.actions}>
@@ -171,7 +184,9 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 								disabled={isSubmitting}
 								className={styles.submitButton}
 							>
-								{isSubmitting ? 'Sending...' : 'Send Message'}
+								{isSubmitting
+									? t('contactForm.sending')
+									: t('contactForm.send')}
 							</button>
 							<button
 								type='button'
@@ -179,7 +194,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 								disabled={isSubmitting}
 								className={styles.cancelButton}
 							>
-								Cancel
+								{t('contactForm.cancel')}
 							</button>
 						</div>
 
@@ -188,7 +203,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 					<button
 						onClick={onClose}
 						className={styles.closeButton}
-						aria-label='Close'
+						aria-label={t('contactForm.close')}
 					>
 						×
 					</button>
@@ -200,17 +215,23 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({
 				onOpenChange={setToastOpen}
 			>
 				<Toast.Title className={styles.ToastTitle}>
-					{toastData.type === 'success' ? 'Success' : 'Error'}
+					{toastData.type === 'success'
+						? t('contactForm.success')
+						: t('contactForm.error')}
 				</Toast.Title>
 				<Toast.Description className={styles.ToastDescription}>
 					{toastData.message}
 				</Toast.Description>
-				<Toast.Action className={styles.ToastAction} asChild altText='Close'>
+				<Toast.Action
+					className={styles.ToastAction}
+					asChild
+					altText={t('contactForm.close')}
+				>
 					<button
 						className={styles.ToastButton}
 						onClick={() => setToastOpen(false)}
 					>
-						Close
+						{t('contactForm.close')}
 					</button>
 				</Toast.Action>
 			</Toast.Root>

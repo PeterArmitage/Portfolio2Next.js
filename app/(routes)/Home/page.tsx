@@ -3,12 +3,15 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import styles from './Home.module.scss';
 import Lottie from 'lottie-react';
 import ufo from '../../../public/ufo.json';
 import ContactIcons from '../../components/ContactIcons/ContactIcons';
+import AnimatedGlobe from '../../components/AnimatedGlobe/AnimatedGlobe';
 
 const Home = () => {
+	const { t } = useTranslation();
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const controls = useAnimation();
 	const [ufoPosition, setUfoPosition] = useState({ top: '50%', left: '50%' });
@@ -91,6 +94,11 @@ const Home = () => {
 			</video>
 
 			<div className={styles.videoOverlay}></div>
+
+			<div className={styles.globeContainer}>
+				<AnimatedGlobe />
+			</div>
+
 			{showUfo && (
 				<motion.div
 					className={styles.lottieContainer}
@@ -106,24 +114,15 @@ const Home = () => {
 					<Lottie animationData={ufo} loop={true} />
 				</motion.div>
 			)}
-			<div
-				className={styles.contactIconsWrapper}
-				style={{
-					position: 'absolute',
-					top: '20px',
-					right: '20px',
-					zIndex: 9999,
-					pointerEvents: 'auto',
-				}}
-			>
+			<div className={styles.contactIconsWrapper}>
 				<ContactIcons />
 			</div>
 			<motion.div className={styles.content} variants={itemVariants}>
 				<motion.h1 className={styles.title} variants={itemVariants}>
-					Welcome to My Digital Universe
+					{t('home.title')}
 				</motion.h1>
 				<motion.p className={styles.subtitle} variants={itemVariants}>
-					Embark on a journey through my portfolio of web development projects
+					{t('home.subtitle')}
 				</motion.p>
 				<motion.div className={styles.buttonContainer} variants={itemVariants}>
 					<Link href='/Projects' passHref>
@@ -132,7 +131,7 @@ const Home = () => {
 							variants={buttonVariants}
 							whileHover='hover'
 						>
-							Launch Projects
+							{t('home.launchButton')}
 						</motion.button>
 					</Link>
 				</motion.div>

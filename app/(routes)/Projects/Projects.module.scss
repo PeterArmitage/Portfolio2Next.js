@@ -1,4 +1,5 @@
 $neon-green: #14e956;
+$neon-purple: #9D00FF;
 
 @mixin neon-text($color) {
   color: #fff;
@@ -13,6 +14,20 @@ $neon-green: #14e956;
     0 0 151px $color;
 }
 
+@mixin button-style($base-color, $light-color) {
+  background: $base-color;
+  background-image: linear-gradient(315deg, $base-color 0%, $light-color 100%);
+  box-shadow: 9px 7px 32px -11px rgba($base-color, 0.74);
+
+  &::before {
+    border: 3px solid $light-color;
+    box-shadow: 0 0 60px rgba($base-color, 0.64);
+  }
+
+  &::after {
+    border: 6px solid $base-color;
+  }
+}
 
 .pageWrapper {
   position: relative;
@@ -211,6 +226,21 @@ $neon-green: #14e956;
               animation: none;
               display: none;
             }
+
+            &.githubButton {
+              background: $neon-purple;
+              background-image: linear-gradient(315deg, $neon-purple 0%, #C566FF 100%);
+              box-shadow: 9px 7px 32px -11px rgba($neon-purple, 0.74);
+
+              &::before {
+                border-color: #C566FF;
+                box-shadow: 0 0 60px rgba($neon-purple, 0.64);
+              }
+
+              &::after {
+                border-color: $neon-purple;
+              }
+            }
           }
         }
       }
@@ -227,6 +257,17 @@ $neon-green: #14e956;
   100% {
     width: 150px;
     height: 60px;
+    opacity: 0;
+  }
+}
+
+@keyframes ringPurple {
+  0% {
+    width: 30px; height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 150px; height: 60px;
     opacity: 0;
   }
 }

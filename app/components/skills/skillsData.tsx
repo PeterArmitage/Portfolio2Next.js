@@ -26,7 +26,7 @@ export interface HardSkillCategory {
 }
 
 export interface SoftSkillCategory {
-	categoryName: string[];
+	categoryName: string;
 	percentage: number;
 }
 
@@ -34,7 +34,7 @@ export type SkillCategory = HardSkillCategory | SoftSkillCategory;
 
 export const skillCat: Record<string, SkillCategory> = {
 	web: {
-		categoryName: 'Web Dev',
+		categoryName: 'skills.categories.webDev',
 		percentage: 50,
 		skillList: [
 			{ name: 'HTML', xp: '2 YRS', icon: FaHtml5 },
@@ -49,7 +49,7 @@ export const skillCat: Record<string, SkillCategory> = {
 		],
 	},
 	game: {
-		categoryName: 'Database',
+		categoryName: 'skills.categories.database',
 		percentage: 20,
 		skillList: [
 			{ name: 'MongoDB', xp: '1 YR', icon: SiMongodb },
@@ -58,7 +58,7 @@ export const skillCat: Record<string, SkillCategory> = {
 		],
 	},
 	design: {
-		categoryName: 'Tools',
+		categoryName: 'skills.categories.tools',
 		percentage: 30,
 		skillList: [
 			{ name: 'Redux Toolkit', xp: '1 YR', icon: SiRedux },
@@ -67,14 +67,7 @@ export const skillCat: Record<string, SkillCategory> = {
 		],
 	},
 	soft: {
-		categoryName: [
-			'Creative',
-			'Perseverant',
-			'Patient',
-			'Enthusiastic',
-			'Hardworking',
-			'Amusing',
-		],
+		categoryName: 'skills.softSkills',
 		percentage: 100,
 	},
 };

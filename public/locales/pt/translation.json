@@ -1,0 +1,89 @@
+{
+    "home": {
+      "title": "Bem-vindo ao Meu Universo Digital",
+      "subtitle": "Embarque em uma jornada através do meu portfólio de projetos de desenvolvimento web",
+      "launchButton": "Lançar Projetos"
+    },
+    "navigation": {
+    "Home": "Início",
+    "About": "Sobre",
+    "Skills": "Habilidades",
+    "Contacts": "Contatos"
+  },
+  "projects": {
+    "title": "Todos os Projetos",
+    "techStack": "Stack Tecnológica:",
+    "visit": "Visitar",
+    "github": "GitHub",
+    "items": [
+      {
+        "title": "Painel Financeiro",
+        "description": "Ferramenta abrangente de gestão financeira que capacita os usuários a assumirem o controle de suas finanças. Acompanhe receitas, despesas e transações sem esforço. Defina e monitore metas financeiras, gere relatórios perspicazes e tome decisões informadas sobre seu dinheiro. Seu centro de comando financeiro pessoal."
+      },
+      {
+        "title": "Fit Forge",
+        "description": "Hub completo de fitness e bem-estar projetado para otimizar sua jornada de saúde. Registre treinos, descubra novos exercícios e explore ideias de refeições nutritivas. Acesse técnicas de melhoria do sono e recuperação, e monitore várias métricas de saúde. Seu personal trainer, nutricionista e coach de bem-estar reunidos em um poderoso painel."
+      },
+      {
+        "title": "Aplicativo de Tarefas",
+        "description": "Um aplicativo simplificado de gerenciamento de tarefas desenvolvido como parte da minha jornada na programação Python. Este projeto demonstra conceitos fundamentais de programação e mostra minha capacidade de traduzir conhecimento teórico em software prático e amigável. Serve como base para entender a arquitetura de aplicações web e design de interface do usuário."
+      },
+      {
+        "title": "Meu Primeiro Portfólio",
+        "description": "Uma iteração inicial do meu portfólio profissional, projetada para mostrar meus primeiros projetos e demonstrar minha crescente proficiência em desenvolvimento web. Este projeto reflete meus primeiros passos na criação de uma presença online abrangente, incorporando princípios de design responsivo e tecnologias web modernas. Serve como um marco para minha progressão em desenvolvimento front-end e design de UI/UX."
+      }
+    ]
+  },
+  "skills": {
+    "categories": {
+      "webDev": "Desen. Web",
+      "database": "Banco de Dados",
+      "tools": "Ferramentas"
+    },
+    "softSkills": [
+      "Criativo",
+      "Perseverante",
+      "Paciente",
+      "Entusiasta",
+      "Trabalhador",
+      "Divertido"
+    ]
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "intro": "Olá! Meu nome é Pete e sou um desenvolvedor full stack autodidata com paixão por criar websites funcionais e envolventes. Originalmente do Reino Unido, tenho chamado o Brasil de lar nos últimos 14 anos, abraçando a cultura vibrante e as diversas experiências que oferece.",
+    "journey": "Minha jornada no desenvolvimento web tem sido impulsionada por uma curiosidade insaciável e amor pelo aprendizado. Prospero na natureza em constante evolução deste campo, sempre ansioso para explorar novas tecnologias e metodologias. React capturou meu coração, mas também estou nutrindo um interesse crescente em desenvolvimento de jogos, visando combinar minhas habilidades de codificação com meu amor por entretenimento interativo.",
+    "teamwork": "Como desenvolvedor, me orgulho de ser um forte jogador de equipe. Acredito no poder da colaboração e na magia que acontece quando mentes diversas se unem para resolver problemas e criar soluções inovadoras.",
+    "interests": "Além da codificação, sou um nerd de coração. Tenho uma profunda apreciação por anime e mangá, encontrando inspiração em suas narrativas e arte. Quando não estou imerso em linhas de código ou no último capítulo de mangá, você pode me encontrar torcendo pelo meu time de futebol favorito ou cuidando da minha forma física.",
+    "connection": "Estou sempre empolgado para me conectar com pessoas que compartilham minhas paixões. Seja para discutir a última série de anime, debater táticas de futebol ou explorar novas fronteiras no desenvolvimento web, estou todo ouvidos!",
+    "animals": "Ah, e já mencionei meu amor por animais? Eles trazem tanta alegria e companheirismo para nossas vidas!",
+    "connect": {
+      "title": "Vamos nos Conectar!",
+      "description": "Adoraria ouvir sobre seus interesses em anime, mangá, fitness, esportes ou desenvolvimento web. Sinta-se à vontade para entrar em contato e iniciar uma conversa!",
+      "button": "Entre em Contato"
+    }
+  },
+  "contactForm": {
+    "title": "Entre em Contato",
+    "name": "Nome *",
+    "company": "Empresa",
+    "email": "E-mail *",
+    "subject": "Assunto *",
+    "message": "Mensagem *",
+    "send": "Enviar Mensagem",
+    "sending": "Enviando...",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "success": "Sucesso",
+    "error": "Erro",
+    "successMessage": "E-mail enviado com sucesso!",
+    "errorMessage": "Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.",
+    "placeholders": {
+      "name": "Seu Nome",
+      "company": "Sua Empresa (Opcional)",
+      "email": "seu.email@exemplo.com",
+      "subject": "Assunto",
+      "message": "Sua mensagem aqui..."
+    }
+  }
+  }

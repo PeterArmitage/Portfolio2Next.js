@@ -55,8 +55,6 @@ const iconVariants = {
 };
 
 export default function ContactIcons() {
-	console.log('ContactIcons rendering');
-
 	return (
 		<div
 			className={styles.contactIcons}

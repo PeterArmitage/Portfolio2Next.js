@@ -1,52 +1,71 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { skillCat, HardSkillCategory } from './skillsData';
-import SkillItem from './SkillItem';
+import dynamic from 'next/dynamic';
+import styles from './Skills.module.scss';
+
+const SkillItem = dynamic(() => import('./SkillItem'), { ssr: false });
+
 import {
 	skillsAnim,
 	leftAnim,
 	rightAnim,
 	skillCatAnim,
 } from './skillAnimations';
-import styles from './Skills.module.scss';
 
 export default function Skills() {
+	const { t } = useTranslation();
 	const { soft: _, ...hardSkills } = skillCat;
 	const skillInterval = useRef<NodeJS.Timeout | null>(null);
 	const skillTimeout = useRef<NodeJS.Timeout | null>(null);
-	const [softSkillIndex, setSoftSkillIndex] = useState<number>(0);
+
+	const [softSkillIndex, setSoftSkillIndex] = useState(0);
 	const [skillCategory, setSkillCategory] =
 		useState<keyof typeof skillCat>('soft');
+	const [isMounted, setIsMounted] = useState(false);
 
-	const softSkillChange = () => {
-		skillInterval.current = setInterval(() => {
-			setSoftSkillIndex(
-				(prev) => (prev + 1) % skillCat['soft'].categoryName.length
-			);
-		}, 4500);
-	};
+	const softSkillsLength = (
+		t('skills.softSkills', { returnObjects: true }) as string[]
+	).length;
 
-	const skillMouseEnter = (name: string) => {
+	const softSkillChange = useCallback(() => {
+		if (typeof window !== 'undefined') {
+			skillInterval.current = setInterval(() => {
+				setSoftSkillIndex((prev) => (prev + 1) % softSkillsLength);
+			}, 4500);
+		}
+	}, [softSkillsLength]);
+
+	const skillMouseEnter = (name: keyof typeof skillCat) => {
 		setSkillCategory(name);
 		if (skillInterval.current) clearInterval(skillInterval.current);
 		if (skillTimeout.current) clearTimeout(skillTimeout.current);
 	};
 
-	const skillMouseLeave = () => {
-		skillTimeout.current = setTimeout(() => {
-			setSkillCategory('soft');
-			softSkillChange();
-		}, 150);
-	};
+	const skillMouseLeave = useCallback(() => {
+		if (typeof window !== 'undefined') {
+			skillTimeout.current = setTimeout(() => {
+				setSkillCategory('soft');
+				softSkillChange();
+			}, 150);
+		}
+	}, [softSkillChange]);
 
 	useEffect(() => {
+		setIsMounted(true);
 		softSkillChange();
 		return () => {
 			if (skillInterval.current) clearInterval(skillInterval.current);
+			if (skillTimeout.current) clearTimeout(skillTimeout.current);
 		};
-	}, []);
+	}, [softSkillChange]);
+
+	if (!isMounted) {
+		return null;
+	}
 
 	return (
 		<motion.section
@@ -61,7 +80,7 @@ export default function Skills() {
 					<div
 						key={key}
 						className={styles.skillsContainer}
-						onMouseEnter={() => skillMouseEnter(key as string)}
+						onMouseEnter={() => skillMouseEnter(key as keyof typeof skillCat)}
 						onMouseLeave={skillMouseLeave}
 					>
 						{(skill as HardSkillCategory).skillList.map(
@@ -83,18 +102,19 @@ export default function Skills() {
 							animate='visible'
 							exit='exit'
 						>
-							{skillCat['soft'].categoryName[softSkillIndex]}
+							{t(`skills.softSkills.${softSkillIndex}`)}
 						</motion.h1>
 					) : (
 						<motion.h1
 							key={`h${skillCategory}`}
 							className={styles.catName}
+							data-category={skillCategory}
 							variants={skillCatAnim}
 							initial='hidden'
 							animate='visible'
 							exit='exit'
 						>
-							{skillCat[skillCategory].categoryName}
+							{t(skillCat[skillCategory].categoryName)}
 						</motion.h1>
 					)}
 				</AnimatePresence>
