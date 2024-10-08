@@ -23,6 +23,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'app/styles')],
   },
+  env: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  }
   
 };
 

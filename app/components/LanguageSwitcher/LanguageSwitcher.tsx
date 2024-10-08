@@ -36,6 +36,7 @@ const LanguageSwitcher: React.FC = () => {
 							width={50}
 							height={50}
 							className='rounded-md'
+							loading='lazy'
 						/>
 					) : (
 						<Image
@@ -44,6 +45,7 @@ const LanguageSwitcher: React.FC = () => {
 							width={40}
 							height={40}
 							className='rounded-md'
+							loading='lazy'
 						/>
 					)}
 				</motion.div>

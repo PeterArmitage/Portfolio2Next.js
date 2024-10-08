@@ -1,22 +1,19 @@
 'use client';
-import React from 'react';
+
+import React, { memo } from 'react';
 import { motion, Variants } from 'framer-motion';
 
-interface GlitchEffectProps {
-	children: React.ReactNode;
-}
-
-const GlitchEffect: React.FC<GlitchEffectProps> = ({ children }) => {
-	const glitchVariants: Variants = {
-		hover: {
-			x: [0, -2, 2, -2, 2, 0],
-			transition: {
-				duration: 0.3,
-				repeat: 0,
-			},
+const glitchVariants: Variants = {
+	hover: {
+		x: [0, -2, 2, -2, 2, 0],
+		transition: {
+			duration: 0.3,
+			repeat: 0,
 		},
-	};
+	},
+};
 
+const GlitchEffect = memo(({ children }: { children: React.ReactNode }) => {
 	return (
 		<motion.div
 			whileHover='hover'
@@ -33,6 +30,8 @@ const GlitchEffect: React.FC<GlitchEffectProps> = ({ children }) => {
 			</motion.div>
 		</motion.div>
 	);
-};
+});
+
+GlitchEffect.displayName = 'GlitchEffect';
 
 export default GlitchEffect;

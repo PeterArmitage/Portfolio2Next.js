@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import Navigation from '../components/Navigation/Navigation';
 import BackToHome from '../components/BackToHome';
 import { Sections } from '../types';
 import ContactFormModal from '../components/ContactFormModal/ContactFormModal';
@@ -13,7 +12,12 @@ const LanguageSwitcher = dynamic(
 		ssr: false,
 	}
 );
-
+const Navigation = dynamic(
+	() => import('../components/Navigation/Navigation'),
+	{
+		ssr: false,
+	}
+);
 const sections: Sections = {
 	About: { label: 'About' },
 	Skills: { label: 'Skills' },

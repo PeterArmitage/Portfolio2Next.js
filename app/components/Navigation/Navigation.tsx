@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -33,6 +35,7 @@ const Navigation: React.FC<NavigationProps> = ({
 	const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 	const [previewPosition, setPreviewPosition] = useState({ top: 0, left: 0 });
 	const navRef = useRef<HTMLElement>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const updatePreviewPosition = (event: MouseEvent) => {
@@ -55,7 +58,7 @@ const Navigation: React.FC<NavigationProps> = ({
 				});
 			}
 		};
-
+		setIsLoading(false);
 		document.addEventListener('mousemove', updatePreviewPosition);
 		return () =>
 			document.removeEventListener('mousemove', updatePreviewPosition);
@@ -150,13 +153,25 @@ const Navigation: React.FC<NavigationProps> = ({
 			return <Link href={`/${key}`}>{content}</Link>;
 		}
 	};
-
+	if (isLoading) return null;
 	return (
-		<nav className={styles.nav} ref={navRef}>
+		<nav className={styles.nav}>
 			<ul className={styles.navList}>
 				{Object.entries(sections).map(([key, { label }]) => {
 					const isContactItem = key === 'contacts';
-					return <li key={key}>{renderNavItem(key, label, isContactItem)}</li>;
+					return (
+						<li key={key}>
+							{isContactItem ? (
+								<div onClick={onOpenContactModal}>
+									{renderNavItem(key, label, isContactItem)}
+								</div>
+							) : (
+								<Link href={`/${key}`}>
+									{renderNavItem(key, label, isContactItem)}
+								</Link>
+							)}
+						</li>
+					);
 				})}
 			</ul>
 		</nav>
