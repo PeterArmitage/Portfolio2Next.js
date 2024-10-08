@@ -1,0 +1,54 @@
+.skeletonTitle {
+    width: 200px;
+    height: 30px;
+    background-color: #333;
+    margin: 10px 0;
+  }
+  
+  .skeletonSubtitle {
+    width: 150px;
+    height: 20px;
+    background-color: #333;
+    margin: 10px 0;
+  }
+  
+  .skeletonText {
+    width: 100%;
+    height: 16px;
+    background-color: #333;
+    margin: 10px 0;
+  }
+  
+  .skeletonImage {
+    width: 100%;
+    height: 300px;
+    background-color: #333;
+  }
+  
+  .skeletonButton {
+    width: 100px;
+    height: 40px;
+    background-color: #333;
+    margin: 10px 10px 10px 0;
+  }
+  
+  .skeletonItem {
+    opacity: 0.7;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+  
+  .skeletonTitle, .skeletonSubtitle, .skeletonText, .skeletonImage, .skeletonButton {
+    border-radius: 4px;
+    animation: pulse 1.5s infinite ease-in-out;
+  }

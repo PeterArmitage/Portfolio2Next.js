@@ -23,6 +23,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'app/styles')],
   },
+  
 };
 
 export default nextConfig;

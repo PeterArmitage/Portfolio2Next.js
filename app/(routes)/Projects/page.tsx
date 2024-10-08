@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import dynamic from 'next/dynamic';
 import styles from './Projects.module.scss';
 import Image from 'next/image';
+import ProjectsSkeleton from '@/app/components/Skeleton/ProjectsSkeleton';
 
 const AnimatedBackground = dynamic(
 	() => import('../../components/AnimatedBackground/AnimatedBackground'),
@@ -16,9 +17,11 @@ export default function Projects() {
 	const { t } = useTranslation();
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 	const [isClient, setIsClient] = useState(false);
-
+	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		setIsClient(true);
+		const timer = setTimeout(() => setIsLoading(false), 1000);
+		return () => clearTimeout(timer);
 	}, []);
 
 	const projects = [
@@ -80,59 +83,61 @@ export default function Projects() {
 							viewBox='0 0 8 20'
 							fill='none'
 							xmlns='http://www.w3.org/2000/svg'
-						>
-							{/* SVG path */}
-						</svg>
+						></svg>
 					</span>
 				</div>
-				<div className={styles.projectsList}>
-					{projects.map((project, index) => (
-						<div
-							key={index}
-							className={`${styles.projectItem} ${
-								index % 2 !== 0 ? styles.reverse : ''
-							}`}
-							onMouseEnter={() => setHoveredIndex(index)}
-							onMouseLeave={() => setHoveredIndex(null)}
-						>
-							<div className={styles.projectImage}>
-								<Image
-									src={project.image}
-									alt={project.title}
-									className={hoveredIndex === index ? styles.hovered : ''}
-									width={500}
-									height={500}
-								/>
-							</div>
-							<div className={styles.projectDetails}>
-								<h4>{project.title}</h4>
-								<p>{project.description}</p>
-								<div className={styles.stackSection}>
-									<h5>{t('projects.techStack')}</h5>
-									<p>{project.stack}</p>
+				{isLoading ? (
+					<ProjectsSkeleton />
+				) : (
+					<div className={styles.projectsList}>
+						{projects.map((project, index) => (
+							<div
+								key={index}
+								className={`${styles.projectItem} ${
+									index % 2 !== 0 ? styles.reverse : ''
+								}`}
+								onMouseEnter={() => setHoveredIndex(index)}
+								onMouseLeave={() => setHoveredIndex(null)}
+							>
+								<div className={styles.projectImage}>
+									<Image
+										src={project.image}
+										alt={project.title}
+										className={hoveredIndex === index ? styles.hovered : ''}
+										width={500}
+										height={500}
+									/>
 								</div>
-								<div className={styles.buttonWrap}>
-									<a
-										href={project.link}
-										target='_blank'
-										rel='noopener noreferrer'
-										className={styles.button}
-									>
-										{t('projects.visit')} &rarr;
-									</a>
-									<a
-										href={project.github}
-										target='_blank'
-										rel='noopener noreferrer'
-										className={`${styles.button} ${styles.githubButton}`}
-									>
-										{t('projects.github')} &rarr;
-									</a>
+								<div className={styles.projectDetails}>
+									<h4>{project.title}</h4>
+									<p>{project.description}</p>
+									<div className={styles.stackSection}>
+										<h5>{t('projects.techStack')}</h5>
+										<p>{project.stack}</p>
+									</div>
+									<div className={styles.buttonWrap}>
+										<a
+											href={project.link}
+											target='_blank'
+											rel='noopener noreferrer'
+											className={styles.button}
+										>
+											{t('projects.visit')} &rarr;
+										</a>
+										<a
+											href={project.github}
+											target='_blank'
+											rel='noopener noreferrer'
+											className={`${styles.button} ${styles.githubButton}`}
+										>
+											{t('projects.github')} &rarr;
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
-				</div>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	);
