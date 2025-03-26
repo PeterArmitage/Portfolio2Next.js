@@ -31,6 +31,10 @@
       {
         "title": "My First Portfolio",
         "description": "An initial iteration of my professional portfolio, designed to showcase my early projects and demonstrate my growing proficiency in web development. This project reflects my first steps in creating a comprehensive online presence, incorporating responsive design principles and modern web technologies. It serves as a benchmark for my progression in front-end development and UI/UX design."
+      },
+      {
+        "title": "Task Management System",
+        "description": "An intuitive workflow management solution designed to streamline task organization and team collaboration. This system enables users to create, prioritize, and track tasks while visualizing project progress through interactive dashboards. With features for task delegation, deadline tracking, and workflow automation, it helps teams maintain focus and efficiency throughout project lifecycles."
       }
     ]
   },

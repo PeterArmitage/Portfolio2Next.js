@@ -59,6 +59,14 @@ export default function Projects() {
 			link: 'https://portfoliopa84.netlify.app/',
 			github: 'https://github.com/PeterArmitage/portfolio',
 		},
+		{
+			title: t('projects.items.3.title'),
+			image: '/images/taskmanage.png',
+			description: t('projects.items.3.description'),
+			stack: 'Angular, C#, .Net, PostgreSQL',
+			link: 'https://taskmanagementsystem25.netlify.app/',
+			github: 'https://github.com/PeterArmitage/TaskManagement',
+		},
 	];
 
 	return (

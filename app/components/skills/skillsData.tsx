@@ -6,12 +6,13 @@ import {
 	SiMongodb,
 	SiPrisma,
 	SiRedux,
+	SiDotnet,
+	SiAngular,
 } from 'react-icons/si';
-import { TbBrandMantine } from 'react-icons/tb';
+
 import { GiPolarBear } from 'react-icons/gi';
 import { MdAnimation } from 'react-icons/md';
-import { SiSupabase, SiRemix } from 'react-icons/si';
-import { MdDashboardCustomize } from 'react-icons/md';
+import { SiSupabase } from 'react-icons/si';
 
 export interface Skill {
 	name: string;
@@ -43,9 +44,9 @@ export const skillCat: Record<string, SkillCategory> = {
 			{ name: 'Typescript', xp: '1 YR', icon: SiTypescript },
 			{ name: 'Next.js', xp: '1 YR', icon: SiNextdotjs },
 			{ name: 'React js', xp: '2 YRS', icon: FaReact },
-			{ name: 'Mantine.ui', xp: '1 YR', icon: TbBrandMantine },
-			{ name: 'Shadcn', xp: '1 YR', icon: MdDashboardCustomize },
-			{ name: 'Remix', xp: '6 Months', icon: SiRemix },
+			{ name: 'C#', xp: '2 Months', icon: SiDotnet },
+			{ name: '.Net', xp: '2 Months', icon: SiDotnet },
+			{ name: 'Angular', xp: '2 Months', icon: SiAngular },
 		],
 	},
 	game: {

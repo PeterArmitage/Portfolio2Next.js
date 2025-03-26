@@ -31,6 +31,10 @@
       {
         "title": "Meu Primeiro Portfólio",
         "description": "Uma iteração inicial do meu portfólio profissional, projetada para mostrar meus primeiros projetos e demonstrar minha crescente proficiência em desenvolvimento web. Este projeto reflete meus primeiros passos na criação de uma presença online abrangente, incorporando princípios de design responsivo e tecnologias web modernas. Serve como um marco para minha progressão em desenvolvimento front-end e design de UI/UX."
+      },
+      {
+        "title": "Sistema de Gerenciamento de Tarefas",
+        "description": "Uma solução intuitiva de gerenciamento de fluxo de trabalho projetada para simplificar a organização de tarefas e a colaboração em equipe. Este sistema permite que os usuários criem, priorizem e acompanhem tarefas enquanto visualizam o progresso do projeto por meio de painéis interativos. Com recursos para delegação de tarefas, acompanhamento de prazos e automação de fluxo de trabalho, ajuda as equipes a manter o foco e a eficiência durante os ciclos de vida do projeto."
       }
     ]
   },
